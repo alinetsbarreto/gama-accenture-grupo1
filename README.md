@@ -44,7 +44,7 @@ Analisar arquivos de clientes e transações, criando uma base de dados relacion
 
 ## Estratégia 
 
-Fazer um processo de ETL dos dados recebidos utilizando Spark e fazer análise de fraudes pelo banco SQL Server e análises estatísticas e relatórios pelo PowerBI.
+Fazer um processo de ETL dos dados recebidos utilizando Spark, fazer análise de fraudes pelo banco SQL Server e análises estatísticas e relatórios pelo PowerBI.
 
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/estrategia.png">
 </p>
