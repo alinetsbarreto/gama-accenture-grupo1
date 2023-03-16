@@ -37,9 +37,10 @@
 
 Desenvolver uma aplicação em Python para carga de arquivos em um banco de dados SQL e gerar relatórios estatísticos visando a descoberta de fraudes bancárias.
 
-## Objetivo inicial
+## Objetivo inicial 
 
-Analisar arquivos de clientes e transações, criando uma base de dados relacional para fazer a carga e depois analisá-la.
+O objetivo inicial é analisar estes arquivos criando uma base de dados relacional para fazer a carga e depois analisá-la. 
+O cartão fraudado, será aquele que tiver movimentações abaixo de 2 minutos de espaçamento entre as transações
 
 
 ## Estratégia 
@@ -58,15 +59,27 @@ Fazer um processo de ETL dos dados recebidos utilizando Spark, fazer análise de
 5. Fazer análises estatíticas e gerar relatório no PowerBI
 
 ## 1. Criar VM no portal Azure e criar ambiente para o Spark
+https://user-images.githubusercontent.com/103044907/225511989-9ac6143c-978c-40c9-bc8b-dda9973e0ef2.mp4
+
 * Conectar com a máquina local via chave SSH
 * Conectar VM com VS code
-* Instalar jupyter notebook
+* Instalar jupyter notebook e preparar o ambiente:
+```shell
+sudo apt update
+sudo apt upgrade
+sudo apt install python3-pip
+sudo apt install unixodbc-dev 
+pip install pyodbc
+sudo apt install default-jre
+sudo apt-get install jupyter-notebook
+
+```
 * Criar o ambiente do Spark
 * Transferir os arquivos csv com os dados para a VM
 
 ## 2. Transformação dos dados com Spark
 
-[Script com a transformação dos dados com Spark:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/scriptSpark.ipynb)
+[Script com a transformação dos dados com Spark:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/scriptSpark-notebook.ipynb)
 
 * Código para juntar csvs da mesma entidade ([clientes](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Clientes), [transação_in](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Transacao-I) e [transação_out](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Transacao-Out)) em um dataframe.
 * Código para juntar os dataframes de transação_in e transação_out em um dataframe de transações.
@@ -74,7 +87,12 @@ Fazer um processo de ETL dos dados recebidos utilizando Spark, fazer análise de
 * Código para verificar os tipos dos dados nas colunas nos dataframes.
 
 
-## 3. Carregar o dados resultantes no banco de dados SQL Server
+## 3. Carregar os dados resultantes no banco de dados SQL Server
+
+### 3.1 Criar banco de dados:
+https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f-a7bc-934a000db8f1.mp4
+
+### 3.2 Script conexão:
 [Script de conexão com o banco de dados e migração:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/script-Spark-conexao-banco.ipynb)
 
 * Instalação do ODBC 18 e pyodbc para conexão com banco de dados.
@@ -100,5 +118,4 @@ Fazer um processo de ETL dos dados recebidos utilizando Spark, fazer análise de
 
 
 
-## Bibliotecas
 
