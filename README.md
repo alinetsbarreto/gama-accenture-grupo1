@@ -116,6 +116,22 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
 </p>
 
+## 6. Modelo de Machine Learning com DecisionTreeClassifier (usando Py script)
+![ml](https://user-images.githubusercontent.com/103044907/225615442-73b16da4-2adc-4263-8664-83f78481ba90.jpg)
 
+###Para construir um modelo de machine learning capaz de prever se uma transação é uma fraude ou não com base nas variáveis selecionadas no Powerbi, deve-se seguir os seguintes passos:
+
+1. Juntar as informações das duas tabelas, clientes cadastro e fraudes, usando a coluna "id" como chave para unir as tabelas. A tabela consolidada com as informações está em:
+[Tabela ML](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/Dados/Resultado/tabml.xlsx)
+
+2. Transformar as variáveis categóricas em variáveis numéricas, usando a técnica de one-hot encoding. Para isso, você pode usar a função get_dummies() do pandas.
+
+3. Dividir o conjunto de dados em conjunto de treinamento e conjunto de teste usando a função train_test_split() do scikit-learn.
+
+4. Treinar um modelo de classificação usando a árvore de decisão (DecisionTreeClassifier) do scikit-learn.
+
+5. Resultado:
+
+![Capturar](https://user-images.githubusercontent.com/103044907/225618177-eca7cf5a-8bfc-44b2-a23a-17f13c1050bc.JPG)
 
 
