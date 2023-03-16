@@ -69,7 +69,6 @@ sudo apt update
 sudo apt upgrade
 sudo apt install python3-pip
 sudo apt install unixodbc-dev 
-pip install pyodbc
 sudo apt install default-jre
 sudo apt-get install jupyter-notebook
 
@@ -119,7 +118,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 ## 6. Modelo de Machine Learning com DecisionTreeClassifier (usando Py script)
 ![ml](https://user-images.githubusercontent.com/103044907/225615442-73b16da4-2adc-4263-8664-83f78481ba90.jpg)
 
-###Para construir um modelo de machine learning capaz de prever se uma transação é uma fraude ou não com base nas variáveis selecionadas no Powerbi, deve-se seguir os seguintes passos:
+### Para construir um modelo de machine learning capaz de prever se uma transação é uma fraude ou não com base nas variáveis selecionadas no Powerbi, deve-se seguir os seguintes passos:
 
 1. Juntar as informações das duas tabelas, clientes cadastro e fraudes, usando a coluna "id" como chave para unir as tabelas. A tabela consolidada com as informações está em:
 [Tabela ML](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/Dados/Resultado/tabml.xlsx)
@@ -134,4 +133,57 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 
 ![Capturar](https://user-images.githubusercontent.com/103044907/225618177-eca7cf5a-8bfc-44b2-a23a-17f13c1050bc.JPG)
 
+### Script PY:
+```shell
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+df_1 = dataset['tipo_transacao']
+df_1 = df_1.str.get_dummies().add_prefix('tipo_transacao_')
+df_2 = pandas.concat([dataset.drop(["tipo_transacao"], axis=1), df_1], axis=1,)
+df_2 = df_2.reindex(dataset.index)
+df_2.head()
+
+df_2["Nome"].unique()
+
+df_2["cliente_cadastrado"] = ["nao" if x == "Cliente não cadastrado" else "sim" for x in df_2["Nome"]]
+
+df_2 = df_2.drop(["Nome", "Email", "Telefone"], axis=1)
+
+df_3 = df_2['cliente_cadastrado']
+df_3 = df_3.str.get_dummies().add_prefix('cliente_cadastrado_')
+df_4 = pandas.concat([df_2.drop(["cliente_cadastrado"], axis=1), df_3], axis=1,)
+df_4 = df_4.reindex(df_2.index)
+
+df_5 = df_4['Period']
+df_5 = df_5.str.get_dummies().add_prefix('period')
+df_6 = pandas.concat([df_4.drop(["Period"], axis=1), df_5], axis=1,)
+df_6 = df_6.reindex(df_4.index)
+
+y = df_6["Fraudado"]
+x = df_6.drop(["Fraudado"], axis=1)
+
+x_train, x_test, y_train, y_test = train_test_split(x, y)
+
+tree = DecisionTreeClassifier(max_depth=3, random_state=0)
+tree.fit(x_train,y_train)
+
+result = tree.predict(x_test)
+
+important_features = pandas.Series(tree.feature_importances_, index=x_train.columns)
+important_features
+
+sns.barplot(x=important_features, y=important_features.index)
+
+plt.xlabel("Importancia das features")
+plt.ylabel('Features')
+plt.title("Analise de importancia")
+plt.show()
+
+```
 
