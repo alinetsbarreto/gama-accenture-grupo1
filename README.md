@@ -97,7 +97,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 * Inserção dos dados no banco de dados.
 
 
-## 4. Analise os dados de clientes e fraudes por SQL
+## 4. Análise dos dados de clientes e fraudes por SQL
 [Script com as análises em SQL:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/analise_SQL_clientes_fraudes.sql)
 
 * Cria uma tabela que une todos os clientes cadastrados e não cadastrados que estão apenas na tabela de transações.
@@ -108,7 +108,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 </p>
 
 
-## 5.Análise estatíticas e geração do relatório no PowerBi
+## 5.Análises estatíticas e geração do relatório no PowerBi
 
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
 </p>
