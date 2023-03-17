@@ -58,7 +58,7 @@ Fazer um processo de ETL dos dados recebidos utilizando Spark e fazer análise d
 4. Analisar os dados de clientes e fraudes por SQL
 5. Fazer análises estatíticas e gerar relatório por PowerBI
 
-## 1. Criar VM no portal Azure e conectar via chave SSH com a máquina local
+## 1. Criação da VM no portal Azure e conexão via chave SSH com a máquina local
 https://user-images.githubusercontent.com/103044907/225511989-9ac6143c-978c-40c9-bc8b-dda9973e0ef2.mp4
 
 * Conectar com a máquina local via chave SSH
@@ -84,12 +84,12 @@ sudo apt-get install jupyter-notebook
 * Código para verificar os tipos dos dados nas colunas nos dataframes.
 
 
-## 3. Carregar os dados resultantes no banco de dados SQL Server
+## 3. Migração dos dados transformados no banco de dados SQL Server
 
-### 3.1 Criar banco de dados:
+### 3.1 Criação do banco de dados:
 https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f-a7bc-934a000db8f1.mp4
 
-### 3.2 Script conexão:
+### 3.2 Script de conexão:
 [Script de conexão com o banco de dados e migração:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/script-Spark-conexao-banco.ipynb)
 
 * Instalação do ODBC 18 e pyodbc para conexão com banco de dados.
@@ -97,7 +97,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 * Inserção dos dados no banco de dados.
 
 
-## 4. Analisar os dados de clientes e fraudes por SQL
+## 4. Analise os dados de clientes e fraudes por SQL
 [Script com as análises em SQL:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/analise_SQL_clientes_fraudes.sql)
 
 * Cria uma tabela que une todos os clientes cadastrados e não cadastrados que estão apenas na tabela de transações.
@@ -108,7 +108,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 </p>
 
 
-## 5.Fazer análises estatíticas e gerar relatório no PowerBi
+## 5.Análise estatíticas e geração do relatório no PowerBi
 
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
 </p>
