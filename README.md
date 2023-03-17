@@ -39,7 +39,7 @@ Desenvolver uma aplicação em Python para carga de arquivos em um banco de dado
 
 ## Objetivo inicial 
 
-O objetivo inicial é analisar estes arquivos criando uma base de dados relacional para fazer a carga e depois analisá-la. 
+O objetivo inicial é analisar os dados de transações bancárias criando uma base de dados relacional para fazer a carga e depois analisá-la. 
 O cartão fraudado, será aquele que tiver movimentações abaixo de 2 minutos de espaçamento entre as transações
 
 
