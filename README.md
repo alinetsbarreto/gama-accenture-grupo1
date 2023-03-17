@@ -112,6 +112,34 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 
 ## 5.Fazer análises estatíticas e gerar relatório no PowerBi
 
+Códigos DAX utilizados:
+* Criar uma coluna na tabela clientes_cadastros que contabiliza o tempo de cadastro de cada cliente:
+```shell
+tempo cadastro = IF(clientes_cadastro[Data_cadastro]= "Não cadastrado", 0,  DATEDIFF(clientes_cadastro[Data_cadastro],TODAY(), YEAR))
+```
+
+* Criar uma coluna na tabela clientes_cadastros com os DDDs de cada cliente:
+```shell
+DDD = IF([Telefone] = "Não cadastrado", "Não cadastrado", MID([Telefone], 5, 2))
+```
+
+* Criar uma coluna na tabela transacoes_clientes_fraudes
+```shell
+Periodo = 
+IF( 
+    hour([data]) >= 0 && HOUR([data]) < 12, "Manha", 
+IF (
+    HOUR([data]) >= 12 && HOUR([data]) < 18, " Tarde",
+    "   Noite"
+))
+```
+
+* Measure da porcentagem de valor de fraudes em relação ao valor total de transações
+```shell
+Taxa Fraudes (R$) = DIVIDE( CALCULATE( SUM(transacao_clientes_fraudes[Valor absoluto]), FILTER(transacao_clientes_fraudes, transacao_clientes_fraudes[Fraude] = "Sim")), SUM(transacao_clientes_fraudes[Valor absoluto]))
+```
+
+
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
 </p>
 
