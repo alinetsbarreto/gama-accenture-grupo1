@@ -52,13 +52,13 @@ Fazer um processo de ETL dos dados recebidos utilizando Spark e fazer análise d
 
  
  ## Execução
-1. Criar VM no portal Azure e conectar via chave SSH com a máquina local
+1. Criar VM no portal Azure
 2. Transformar os dados com Spark
 3. Carregar o dados transformados no banco de dados SQL Server
 4. Analisar os dados de clientes e fraudes por SQL
 5. Fazer análises estatíticas e gerar relatório por PowerBI
 
-## 1. Criar VM no portal Azure e criar ambiente para o Spark
+## 1. Criar VM no portal Azure e conectar via chave SSH com a máquina local
 https://user-images.githubusercontent.com/103044907/225511989-9ac6143c-978c-40c9-bc8b-dda9973e0ef2.mp4
 
 * Conectar com a máquina local via chave SSH
@@ -68,18 +68,16 @@ https://user-images.githubusercontent.com/103044907/225511989-9ac6143c-978c-40c9
 sudo apt update
 sudo apt upgrade
 sudo apt install python3-pip
-sudo apt install unixodbc-dev 
 sudo apt install default-jre
 sudo apt-get install jupyter-notebook
-
 ```
-* Criar o ambiente do Spark
-* Transferir os arquivos csv com os dados para a VM
+* Extrair os arquivos csv e transferir para VM
 
 ## 2. Transformação dos dados com Spark
 
 [Script com a transformação dos dados com Spark:](https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/scriptSpark-notebook.ipynb)
 
+* Código para criar ambiente do Spark em máquina Linux
 * Código para juntar csvs da mesma entidade ([clientes](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Clientes), [transação_in](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Transacao-I) e [transação_out](https://github.com/paulacapuano/gama-accenture-grupo1/tree/main/Dados/Transacao-Out)) em um dataframe.
 * Código para juntar os dataframes de transação_in e transação_out em um dataframe de transações.
 * Código para verificar se tem colunas de ID repetidos no dataframe de transação.
@@ -112,10 +110,15 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 
 ## 5.Fazer análises estatíticas e gerar relatório no PowerBi
 
-Códigos DAX utilizados:
+<img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
+</p>
+
+**Códigos DAX utilizados**:
 * Criar uma coluna na tabela clientes_cadastros que contabiliza o tempo de cadastro de cada cliente:
 ```shell
-tempo cadastro = IF(clientes_cadastro[Data_cadastro]= "Não cadastrado", 0,  DATEDIFF(clientes_cadastro[Data_cadastro],TODAY(), YEAR))
+tempo cadastro = 
+IF(clientes_cadastro[Data_cadastro]= "Não cadastrado", 0, 
+DATEDIFF(clientes_cadastro[Data_cadastro],TODAY(), YEAR))
 ```
 
 * Criar uma coluna na tabela clientes_cadastros com os DDDs de cada cliente:
@@ -123,7 +126,7 @@ tempo cadastro = IF(clientes_cadastro[Data_cadastro]= "Não cadastrado", 0,  DAT
 DDD = IF([Telefone] = "Não cadastrado", "Não cadastrado", MID([Telefone], 5, 2))
 ```
 
-* Criar uma coluna na tabela transacoes_clientes_fraudes
+* Criar uma coluna na tabela transacoes_clientes_fraudes que informa o período do dia da transação
 ```shell
 Periodo = 
 IF( 
@@ -136,12 +139,25 @@ IF (
 
 * Measure da porcentagem de valor de fraudes em relação ao valor total de transações
 ```shell
-Taxa Fraudes (R$) = DIVIDE( CALCULATE( SUM(transacao_clientes_fraudes[Valor absoluto]), FILTER(transacao_clientes_fraudes, transacao_clientes_fraudes[Fraude] = "Sim")), SUM(transacao_clientes_fraudes[Valor absoluto]))
+Taxa Fraudes (R$) = 
+DIVIDE( 
+CALCULATE( SUM(transacao_clientes_fraudes[Valor absoluto]), 
+FILTER(transacao_clientes_fraudes, transacao_clientes_fraudes[Fraude] = "Sim")), 
+SUM(transacao_clientes_fraudes[Valor absoluto])
+)
 ```
 
 
-<img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
-</p>
+* Measure de porcentagem da quantidade de fraudes em relação ao total de transações
+```shell
+Taxa Qtd Fraudes = 
+DIVIDE(
+CALCULATE( COUNT(transacao_clientes_fraudes[id]), 
+FILTER(transacao_clientes_fraudes, transacao_clientes_fraudes[Fraude] = "Sim")),
+COUNT(transacao_clientes_fraudes[id]))
+)
+```
+
 
 ## 6. Modelo de Machine Learning com DecisionTreeClassifier (usando Py script)
 ![ml](https://user-images.githubusercontent.com/103044907/225615442-73b16da4-2adc-4263-8664-83f78481ba90.jpg)
