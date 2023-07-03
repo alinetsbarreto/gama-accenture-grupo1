@@ -108,7 +108,7 @@ https://user-images.githubusercontent.com/103044907/225514324-97985f7c-6efb-4e3f
 </p>
 
 
-## 5.Análises estatíticas e geração do relatório no PowerBi
+## 5.Análises estatísticas e geração do relatório no PowerBi
 
 <img src="https://github.com/paulacapuano/gama-accenture-grupo1/blob/main/imagem/powerbi.png">
 </p>
